@@ -1,0 +1,95 @@
+<div>
+<div class = "div_class">
+  <h1>Text</h1>
+  <h1 class="text" id=id_1>Text</h1>
+  <h3>Text</h3>
+  <button onClick="button()">Button_text</button>
+  <br>
+  <input placeholder="test" id="id_test">
+  <p id="id_1"></p>
+  <p id="id_2"></p>
+  <canvas id="canvas" width="600" height="300"></canvas>
+  <img id="id_3" src="https://url.com/image.jpg%22%3E
+</div>
+
+
+CSS:
+#id_1
+#canvas
+{
+  background: #99ff66;
+  border: 3px solid black;
+  width: 40%;
+  margin:auto;
+  color: black;
+}
+
+img
+{
+  max-width: 100%;
+}
+
+.text
+{
+  font-family: arial;
+}
+
+JavaScript:
+var VARIABLE;
+
+function button()
+{
+  let text = document.getElementById("id_test").value;
+  if(CONDITION){
+  document.getElementById("id_1").innerHTML="Text to be printed";
+  document.getElementById("id_2").innerHTML += VARIABLE;
+  document.getElementById("id_3").src="https://url.com/image.jpg";
+  }
+}
+
+function canvas()
+{
+  let VARIABLE = document.getElementById("canvas").getContext("2d");
+  VARIABLE.fillStyle = "rgba(255,255,0,0.25)";
+  VARIABLE.fillRect(0, 0, 600, 300);
+  VARIABLE.beginPath();
+  VARIABLE.fillStyle = "#009199";
+  VARIABLE.fill();
+  VARIABLE.stroke();
+}
+
+function field()
+{
+  const VARIABLE_FIELD = ["zero","one","two","three"];
+
+
+}
+
+function object()
+{
+  let object = {one:null, two:null, three:null}
+  text = VARIABLE_FIELD[i].object_one + " " + VARIABLE_FIELD[i].object_two + " " + VARIABLE_FIELD[i].object_three
+}
+
+
+
+
+Usable things:
+alert("Alert")
+VARIABLE = prompt("Prompt")
+
+.replace("what", "what to")
+.replace("a", A.fontcolor("blue"))
+.length
+.value
+.toUpperCase()
+.indexOf("A")
+.shift()
+.unshift(A)
+.splice(--A,1)
+.pop()
+push(A)
+isNAN
+
+Math.random()
+Math.floor(NUMBER)
