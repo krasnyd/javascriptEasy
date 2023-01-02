@@ -1,1 +1,165 @@
-SEM TO NEJPOZDEJI V 17:10 NAKOPÍRUJU
+změň si návzy proměnných a funkcí
+
+///// HTML //////
+<div class="col">
+  <button onClick="pridat()">Přidat do vozu</button>
+  <button onClick="pridatVse()">Přidat vše</button>
+  <h1>Rozšiřující výbava</h1>
+  <p id="vypisVybava"></p>
+</div>
+<div class="col">
+  <button onClick="odebrat()">Odebrat z vozu</button><button onClick="odebratVse()">Odebrat vše</button>
+  <h1>Zakoupená výbava</h1>
+  <input disabled placeholder="Kč"/ id="cenaCelkem">
+  <p id="vypisZakoup"></p>
+</div>
+
+
+///// CSS //////
+
+.col {
+  float: left;
+  margin-right: 30px;
+}
+
+///// JS //////
+
+const vybavaPole = [
+    { name: "Palubní počítač",     price: 30000 },
+    { name: "Hill Hold Assisst",   price: 5000  },
+    { name: "Apple Car Play",      price: 6000  },
+    { name: "Android Auto",        price: 5000  },
+    { name: "Manuální převodovka", price: 15000 },
+    { name: "Vyhřívané čelní sklo",price: 10000},
+    { name: "Keyless system",      price: 18500 },
+    { name: "Tažné zařízení",      price: 12000 },
+    { name: "Webasto",             price: 25000 },
+    { name: "Klimatizace",         price: 8000  },
+  ];
+
+const zakoupenoPole = [];
+
+function pridat() {
+
+    if (vybavaPole.length == 0) {
+        alert("Už máte všechno, co můžeme nabídnout!")
+        return;
+    }
+    let vyberSi = prompt("Co vám můžeme nabídnout?");
+    const item = vybavaPole.find(item => item.name.toLowerCase() === vyberSi.toLowerCase());
+    if (item) {
+        zakoupenoPole.push(item);
+        removeItem(vybavaPole, item);
+
+    } else {
+        alert("To bohužel nenabízíme, nebo už to máte");
+    }
+    while (true) {
+        if (vybavaPole.length == 0) {
+            alert("Už máte všechno, co můžeme nabídnout!")
+            return;
+        }
+        let vyberuSiJeste = prompt("Co ještě vám můžeme nabídnout");
+        if (vyberuSiJeste) {
+            const itemJeste = vybavaPole.find(item => item.name.toLowerCase() === vyberuSiJeste.toLowerCase())
+            if (itemJeste) {
+                zakoupenoPole.push(itemJeste);
+                removeItem(vybavaPole, itemJeste);
+            } else {
+                alert("To bohužel nenabízíme, nebo už to máte");
+            }
+            printAll();
+        } else {
+            printAll();
+            return;
+        }
+    }
+}
+
+function odebrat() {
+    if (zakoupenoPole.length == 0) {
+        alert("Už není co odebrat!")
+        return;
+    }
+    let vyberSi = prompt("Co vám můžeme nabídnout?");
+
+    const item = zakoupenoPole.find(item => item.name.toLowerCase() === vyberSi.toLowerCase());
+    if (item) {
+        vybavaPole.push(item);
+        removeItem(zakoupenoPole, item);
+        printAll();
+    } else {
+        alert("To bohužel nenabízíme, nebo už to máte");
+    }
+    while (true) {
+        if (zakoupenoPole.length == 0) {
+            alert("Už nemáte v autě žádnou příplatkovou výbavu")
+            return;
+        }
+        let vyberuSiJeste = prompt("Co byste chtěli odebrat?");
+        if (vyberuSiJeste) {
+            const itemJeste = zakoupenoPole.find(item => item.name.toLowerCase() === vyberuSiJeste.toLowerCase())
+            if (itemJeste) {
+                vybavaPole.push(itemJeste);
+                removeItem(zakoupenoPole, itemJeste);
+            } else {
+                alert("To bohužel ve vozu nemáte");
+            }
+            printAll();
+        } else {
+            printAll();
+            return;
+        }
+    }
+}
+
+function pridatVse() {
+    if (vybavaPole.length == 0) {
+        alert("Už máte všechno, co můžeme nabídnout!")
+        return;
+    }
+    zakoupenoPole.push(...vybavaPole);
+    vybavaPole.length = 0;
+    printAll();
+};
+
+function odebratVse() {
+    if (zakoupenoPole.length == 0) {
+        alert("Už nemáte v autě žádnou příplatkovou výbavu")
+        return;
+    }
+    vybavaPole.push(...zakoupenoPole);
+    zakoupenoPole.length = 0;
+    printAll();
+};
+
+function printAll() {
+    document.getElementById("vypisVybava").innerHTML = "";
+    for (let item of vybavaPole) {
+        document.getElementById("vypisVybava").innerHTML += "<li>" + item.name + " cena: " + item.price + " Kč </li>";
+    }
+
+    document.getElementById("vypisZakoup").innerHTML = "";
+    for (let item of zakoupenoPole) {
+        document.getElementById("vypisZakoup").innerHTML += "<li>" + item.name + " cena: " + item.price + " Kč </li>";
+    }
+
+    let castka = 0;
+    for (let item of zakoupenoPole) {
+        castka += item.price;
+    }
+    document.getElementById('cenaCelkem').value = "Celková částka: " + castka + " Kč";
+}
+
+printAll();
+
+function removeItem(arr, item) {
+    for (var i = 0; i < arr.length; i++) {
+
+        if (arr[i] === item) {
+            arr.splice(i, 1);
+            i--;
+        }
+    }
+}
+
