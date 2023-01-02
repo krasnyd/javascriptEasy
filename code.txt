@@ -24,7 +24,7 @@ změň si návzy proměnných a funkcí, možná ještě upravím trochu tu logi
 
 ///// JS //////
 
-const vybavaPole = [
+let vybavaPole = [
     { name: "Palubní počítač",     price: 30000 },
     { name: "Hill Hold Assisst",   price: 5000  },
     { name: "Apple Car Play",      price: 6000  },
@@ -37,7 +37,7 @@ const vybavaPole = [
     { name: "Klimatizace",         price: 8000  },
   ];
 
-const zakoupenoPole = [];
+let zakoupenoPole = [];
 
 function pridat() {
 
@@ -118,8 +118,8 @@ function pridatVse() {
         alert("Už máte všechno, co můžeme nabídnout!")
         return;
     }
-    zakoupenoPole.push(...vybavaPole);
-    vybavaPole.length = 0;
+    zakoupenoPole = zakoupenoPole.concat(vybavaPole);
+    vybavaPole = [];
     printAll();
 };
 
@@ -128,8 +128,8 @@ function odebratVse() {
         alert("Už nemáte v autě žádnou příplatkovou výbavu")
         return;
     }
-    vybavaPole.push(...zakoupenoPole);
-    zakoupenoPole.length = 0;
+    vybavaPole = vybavaPole.concat(zakoupenoPole);
+    zakoupenoPole = [];
     printAll();
 };
 
@@ -162,4 +162,5 @@ function removeItem(arr, item) {
         }
     }
 }
+
 
