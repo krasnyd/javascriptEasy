@@ -1,4 +1,5 @@
-změň si návzy proměnných a funkcí, možná ještě upravím trochu tu logiku v pridat() a odebrat()
+změň si návzy proměnných a funkcí
+asi takhle good, kdyžtak napiš
 
 ///// HTML //////
 <div class="col">
