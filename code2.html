@@ -91,11 +91,12 @@
         
         function smazatPolozku(){
             let index = parseInt(document.getElementById("polozka").value);
-            if (index >= hodnoty.length) {
+            let hodnotyNeSmazane = hodnoty.filter(o => !o.smazano);
+            if (index >= hodnotyNeSmazane.length) {
                 alert("blbej index vole");
                 return;
             }
-            hodnoty[index].smazano = true;
+            hodnotyNeSmazane[index].smazano = true;
             max_min_souhrn();
         }
         
@@ -104,19 +105,73 @@
         }
         
         function sloupcovy(){
-          graf_select = 1;
-        }
+            graf_select = 1;
+            let obsah=document.getElementById("platno").getContext("2d");
+            let x=10;
+            obsah.clearRect(0,0,600,400);
+            max_min_souhrn();
+            for(let i=0;i<hodnoty.length;i++)
+                {
+                    if (hodnoty[i].smazano) continue;
+
+                if(max===hodnoty[i].value)
+                    {
+                    obsah.beginPath();
+                    obsah.rect(x,400,40,-hodnoty[i].value);
+                    obsah.fillStyle="green";
+                    obsah.strokeStyle="black";
+                    obsah.fill();
+                    obsah.stroke();  
+                    }
+                else if (min===hodnoty[i].value)
+                    {
+                    obsah.beginPath();
+                    obsah.rect(x,400,40,-hodnoty[i].value);
+                    obsah.fillStyle="red";
+                    obsah.strokeStyle="black";
+                    obsah.stroke();
+                    obsah.fill();
+                    }
+                else
+                    {
+                    obsah.beginPath();
+                    obsah.rect(x,400,40,-hodnoty[i].value);
+                    obsah.fillStyle="yellow";
+                    obsah.strokeStyle="black";
+                    obsah.stroke();
+                    obsah.fill();
+                    }
+                x+=41;
+                }  
+            
+            }
         
         function prolnuty(){
           graf_select = 2;
         }
         
         function smazatData(){
-          
+            let pocatecni_rok = 0;
+            let rok_pocitani = 0;
+            let roky_hodnota = 0;
+            let roky =[];
+            let hodnoty =[];
+            let hodnoty_smazane = [];
+            let max = 0;
+            let min = 0;
+            //let prumer_pocet = 0;
+            let prumer = 0;
+            let prumer_final = 0;
+            let graf_select = 0;
         }
         
         function souhrn(){
-          
+            let text = "";
+            
+          for (let i = 0; i < hodnoty.length; i++) {
+            text += hodnoty[i].value; // tady tu mrdku proiteruješ
+          } 
+          alert(text);
         }
         
         function max_min_souhrn(){
